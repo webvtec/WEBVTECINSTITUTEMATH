@@ -1,85 +1,159 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>webvtecinstitutemath</title>
+    <title>Webvtec Institute Math</title>
 
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #00008B; /* Dark Blue */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: white;
+        }
+
+        /* HEADER */
+        header {
             text-align: center;
+            padding: 25px 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
         }
 
-        h1 {
-            color: purple;
+        header h1 {
             font-size: 60px;
-            margin-top: 20px;
+            margin: 0;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #ff00cc, #3333ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .container {
-            margin-top: 40px;
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            margin-top: 50px;
         }
 
-        input {
-            padding: 10px;
-            margin: 5px;
-            width: 250px;
-            border-radius: 5px;
-            border: none;
+        .hero h2 {
+            font-size: 38px;
+            margin-bottom: 10px;
+            color: #00e5ff;
         }
 
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: purple;
-            color: white;
-            font-weight: bold;
+        .hero p {
+            font-size: 20px;
+            color: #dcdcdc;
         }
 
-        button:hover {
-            background-color: #b300ff;
+        /* FORM CONTAINER */
+        .forms {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+            flex-wrap: wrap;
         }
 
         .form-box {
-            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 15px;
+            width: 320px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            backdrop-filter: blur(15px);
+            transition: transform 0.3s ease;
+        }
+
+        .form-box:hover {
+            transform: translateY(-8px);
+        }
+
+        .form-box h3 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background: linear-gradient(90deg, #ff00cc, #3333ff);
+            color: white;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
             padding: 20px;
-            background-color: rgba(255,255,255,0.1);
-            width: 300px;
-            border-radius: 10px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        @media(max-width: 768px) {
+            .forms {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h1>webvtecinstitutemath</h1>
+    <header>
+        <h1>Webvtec Institute Math</h1>
+    </header>
 
-    <div class="container">
+    <section class="hero">
+        <h2>Master Mathematics With Confidence</h2>
+        <p>Interactive learning • Smart progress tracking • Secure login system</p>
+    </section>
 
-        <!-- Sign Up -->
+    <div class="forms">
+
+        <!-- SIGN UP -->
         <div class="form-box">
-            <h2>Sign Up</h2>
-            <input type="email" id="signupEmail" placeholder="Email"><br>
-            <input type="password" id="signupPassword" placeholder="Password"><br>
+            <h3>Create Account</h3>
+            <input type="email" id="signupEmail" placeholder="Enter Email">
+            <input type="password" id="signupPassword" placeholder="Enter Password">
             <button onclick="signUp()">Sign Up</button>
         </div>
 
-        <!-- Sign In -->
+        <!-- SIGN IN -->
         <div class="form-box">
-            <h2>Sign In</h2>
-            <input type="email" id="signinEmail" placeholder="Email"><br>
-            <input type="password" id="signinPassword" placeholder="Password"><br>
+            <h3>Welcome Back</h3>
+            <input type="email" id="signinEmail" placeholder="Enter Email">
+            <input type="password" id="signinPassword" placeholder="Enter Password">
             <button onclick="signIn()">Sign In</button>
         </div>
 
     </div>
 
-    <!-- Firebase SDK (Modular v10) -->
+    <footer>
+        © 2026 Webvtec Institute Math | Empowering Future Mathematicians
+    </footer>
+
+    <!-- Firebase (Modular) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
@@ -102,7 +176,7 @@
             const password = document.getElementById("signupPassword").value;
 
             createUserWithEmailAndPassword(auth, email, password)
-                .then(() => alert("Sign Up Successful!"))
+                .then(() => alert("Account Created Successfully!"))
                 .catch(error => alert(error.message));
         }
 
@@ -111,7 +185,7 @@
             const password = document.getElementById("signinPassword").value;
 
             signInWithEmailAndPassword(auth, email, password)
-                .then(() => alert("Sign In Successful!"))
+                .then(() => alert("Login Successful!"))
                 .catch(error => alert(error.message));
         }
     </script>
