@@ -2,141 +2,154 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>WEB VTEC MATH INSTITUTE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEB VTEC INSTITUTE</title>
 
-    <!-- SEO & Description -->
-    <meta name="description" content="WEB VTEC INSTITUTE – Compete in spelling challenges, quizzes, word games, and monthly tournaments. Earn tokens, climb leaderboards, and win cash prizes.">
-    <meta name="keywords" content="WEB VTEC, WEB VTECH, webvtec, webvtech, web vtech, webvtechinstitute, webvtecinstitute, Web Vtec Institute, webvtec, web vtec institute, WEB VTEC INSTITUTE, spelling, quiz, word games, tournaments, leaderboard, Jamaica, online learning">
-    <meta name="author" content="WEB VTEC INSTITUTE">
-    <link rel="canonical" href="https://webvtecinstitute.com/">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dqqr9udcs/image/upload/v1771220928/WEB_VTEC_LOGO_jfihzc_e_background_removal_f_png_ooes1p_c_crop_w_800_h_800_tbbcb3.png">
-
-    <!-- PayPal + Firebase -->
-    <script src="https://www.paypal.com/sdk/js?client-id=ARB1-XkFwZYfvm4fdyXYH-t3obhybfoGwT4YVeDZqJ2RwxFg9wNBb-TxZvanRq6uXndODOtAdMWfBeoj&currency=USD&locale=en_US"></script>
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- PayPal -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            background: white;
-            min-height: 100vh;
-            padding-bottom: 50px;
-        }
-
-        .institute-header {
-            background: #261A4C;
-            padding: 12px 0;
-            text-align: center;
-            border-bottom: 2.5px solid #FFD700;
-            position: relative;
-        }
-
-        .institute-title {
-            font-size: 28px;
-            font-weight: 700;
+            background: linear-gradient(135deg, #1a1a40, #261A4C);
             color: white;
-            letter-spacing: 2px;
-            font-family: 'Georgia', 'Times New Roman', serif;
-        }
-
-        .coin-display {
-            position: absolute;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            display: none;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 215, 0, 0.2);
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 2px solid #FFD700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .coin-display.active {
-            display: flex;
-        }
-
-        .coin-display:hover {
-            background: rgba(255, 215, 0, 0.3);
-            transform: translateY(-50%) scale(1.05);
-        }
-
-        .coin-icon {
-            font-size: 24px;
-        }
-
-        .coin-amount {
-            color: #FFD700;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        /* Payment Container */
-        #payment-container {
-            max-width: 500px;
-            margin: 100px auto;
-            padding: 40px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
-        #payment-container h2 {
-            color: #261A4C;
+        .header {
+            background: #261A4C;
+            padding: 15px;
+            border-bottom: 3px solid #FFD700;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+            letter-spacing: 2px;
+            font-family: Georgia, serif;
+        }
+
+        .container {
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 500px;
+        }
+
+        .card h2 {
             margin-bottom: 20px;
-            font-size: 28px;
+            color: #FFD700;
         }
 
-        #payment-container p {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        #paypal-button-container {
-            margin-top: 20px;
-        }
-
-        .payment-success {
-            color: #28a745;
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            background: #FFD700;
             font-weight: bold;
-            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ffcc00;
+        }
+
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .leaderboard {
+            margin-top: 40px;
+        }
+
+        .leaderboard h3 {
+            color: #FFD700;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="institute-header">
-        <h1 class="institute-title">WEB VTEC INSTITUTE</h1>
-        <div class="coin-display">
-            <span class="coin-icon">🪙</span>
-            <span class="coin-amount">0</span>
-        </div>
+    <div class="header">
+        <h1>WEB VTEC MATH INSTITUTE</h1>
     </div>
 
-    <div id="payment-container">
-        <h2>Upgrade Your Account</h2>
-        <p>Join tournaments, compete in spelling challenges, and earn real rewards.</p>
-        <div id="paypal-button-container"></div>
+    <div class="container">
+
+        <!-- Algebra Practice -->
+        <div class="card">
+            <h2>Algebra Practice</h2>
+            <p id="question">Solve: x + 5 = 12</p>
+            <input type="number" id="answer" placeholder="Enter value of x">
+            <br><br>
+            <button onclick="checkAnswer()">Submit Answer</button>
+            <p id="result"></p>
+        </div>
+
+        <!-- Algebra Tournament -->
+        <div class="card">
+            <h2>Monthly Algebra Tournament</h2>
+            <p>Compete in timed algebra challenges and win cash prizes.</p>
+            <div id="paypal-button-container"></div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="leaderboard">
+            <h3>Top Algebra Champions</h3>
+            <p>Coming Soon...</p>
+        </div>
+
     </div>
+
+<script>
+    // Algebra Logic
+    function checkAnswer() {
+        let answer = document.getElementById("answer").value;
+        let result = document.getElementById("result");
+
+        if(answer == 7) {
+            result.innerHTML = "Correct! 🎉";
+            result.style.color = "#00ff88";
+        } else {
+            result.innerHTML = "Incorrect. Try Again.";
+            result.style.color = "red";
+        }
+    }
+</script>
+
+<script>
+    // PayPal Button
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: { value: '10.00' }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                alert("Tournament Entry Successful!");
+            });
+        }
+    }).render('#paypal-button-container');
+</script>
 
 </body>
 </html>
