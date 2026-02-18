@@ -1,194 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Webvtec Institute Math</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB VTEC INSTITUTE</title>
+
+    <!-- SEO & Description -->
+    <meta name="description" content="WEB VTEC INSTITUTE – Compete in spelling challenges, quizzes, word games, and monthly tournaments. Earn tokens, climb leaderboards, and win cash prizes.">
+    <meta name="keywords" content="WEB VTEC, WEB VTECH, webvtec, webvtech, web vtech, webvtechinstitute, webvtecinstitute, Web Vtec Institute, webvtec, web vtec institute, WEB VTEC INSTITUTE, spelling, quiz, word games, tournaments, leaderboard, Jamaica, online learning">
+    <meta name="author" content="WEB VTEC INSTITUTE">
+    <link rel="canonical" href="https://webvtecinstitute.com/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dqqr9udcs/image/upload/v1771220928/WEB_VTEC_LOGO_jfihzc_e_background_removal_f_png_ooes1p_c_crop_w_800_h_800_tbbcb3.png">
+
+    <!-- PayPal + Firebase -->
+    <script src="https://www.paypal.com/sdk/js?client-id=ARB1-XkFwZYfvm4fdyXYH-t3obhybfoGwT4YVeDZqJ2RwxFg9wNBb-TxZvanRq6uXndODOtAdMWfBeoj&currency=USD&locale=en_US"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: white;
+            font-family: Arial, sans-serif;
+            background: white;
+            min-height: 100vh;
+            padding-bottom: 50px;
         }
 
-        /* HEADER */
-        header {
+        .institute-header {
+            background: #261A4C;
+            padding: 12px 0;
             text-align: center;
-            padding: 25px 0;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
+            border-bottom: 2.5px solid #FFD700;
+            position: relative;
         }
 
-        header h1 {
-            font-size: 60px;
-            margin: 0;
+        .institute-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
             letter-spacing: 2px;
-            background: linear-gradient(90deg, #ff00cc, #3333ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Georgia', 'Times New Roman', serif;
         }
 
-        /* HERO SECTION */
-        .hero {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .hero h2 {
-            font-size: 38px;
-            margin-bottom: 10px;
-            color: #00e5ff;
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: #dcdcdc;
-        }
-
-        /* FORM CONTAINER */
-        .forms {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin-top: 50px;
-            flex-wrap: wrap;
-        }
-
-        .form-box {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 30px;
-            border-radius: 15px;
-            width: 320px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-            backdrop-filter: blur(15px);
-            transition: transform 0.3s ease;
-        }
-
-        .form-box:hover {
-            transform: translateY(-8px);
-        }
-
-        .form-box h3 {
-            font-size: 26px;
-            margin-bottom: 20px;
-            color: #ffcc00;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
-            font-weight: bold;
+        .coin-display {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 215, 0, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid #FFD700;
             cursor: pointer;
-            background: linear-gradient(90deg, #ff00cc, #3333ff);
-            color: white;
-            transition: 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        button:hover {
-            opacity: 0.85;
+        .coin-display.active {
+            display: flex;
         }
 
-        footer {
+        .coin-display:hover {
+            background: rgba(255, 215, 0, 0.3);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .coin-icon {
+            font-size: 24px;
+        }
+
+        .coin-amount {
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Payment Container */
+        #payment-container {
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-top: 80px;
-            padding: 20px;
-            font-size: 14px;
-            color: #aaa;
         }
 
-        @media(max-width: 768px) {
-            .forms {
-                flex-direction: column;
-                align-items: center;
-            }
+        #payment-container h2 {
+            color: #261A4C;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        #payment-container p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        #paypal-button-container {
+            margin-top: 20px;
+        }
+
+        .payment-success {
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Webvtec Institute Math</h1>
-    </header>
-
-    <section class="hero">
-        <h2>Master Mathematics With Confidence</h2>
-        <p>Interactive learning • Smart progress tracking • Secure login system</p>
-    </section>
-
-    <div class="forms">
-
-        <!-- SIGN UP -->
-        <div class="form-box">
-            <h3>Create Account</h3>
-            <input type="email" id="signupEmail" placeholder="Enter Email">
-            <input type="password" id="signupPassword" placeholder="Enter Password">
-            <button onclick="signUp()">Sign Up</button>
+    <div class="institute-header">
+        <h1 class="institute-title">WEB VTEC INSTITUTE</h1>
+        <div class="coin-display">
+            <span class="coin-icon">🪙</span>
+            <span class="coin-amount">0</span>
         </div>
-
-        <!-- SIGN IN -->
-        <div class="form-box">
-            <h3>Welcome Back</h3>
-            <input type="email" id="signinEmail" placeholder="Enter Email">
-            <input type="password" id="signinPassword" placeholder="Enter Password">
-            <button onclick="signIn()">Sign In</button>
-        </div>
-
     </div>
 
-    <footer>
-        © 2026 Webvtec Institute Math | Empowering Future Mathematicians
-    </footer>
-
-    <!-- Firebase (Modular) -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
-        from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDc-V5TgGDdRPaxHVA9ptQCh4eeNqZn3yg",
-            authDomain: "webvtecinstitutemath.firebaseapp.com",
-            projectId: "webvtecinstitutemath",
-            storageBucket: "webvtecinstitutemath.firebasestorage.app",
-            messagingSenderId: "789694287892",
-            appId: "1:789694287892:web:b80380e21480d096e59701"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        window.signUp = function() {
-            const email = document.getElementById("signupEmail").value;
-            const password = document.getElementById("signupPassword").value;
-
-            createUserWithEmailAndPassword(auth, email, password)
-                .then(() => alert("Account Created Successfully!"))
-                .catch(error => alert(error.message));
-        }
-
-        window.signIn = function() {
-            const email = document.getElementById("signinEmail").value;
-            const password = document.getElementById("signinPassword").value;
-
-            signInWithEmailAndPassword(auth, email, password)
-                .then(() => alert("Login Successful!"))
-                .catch(error => alert(error.message));
-        }
-    </script>
+    <div id="payment-container">
+        <h2>Upgrade Your Account</h2>
+        <p>Join tournaments, compete in spelling challenges, and earn real rewards.</p>
+        <div id="paypal-button-container"></div>
+    </div>
 
 </body>
 </html>
